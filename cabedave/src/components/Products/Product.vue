@@ -10,7 +10,7 @@
         <v-card-header-text>
           <router-link :to="{ name: 'product', params: { id: product.id }}">
             <v-card-title class="black--text text-decoration-none">
-              {{ product.title.toUpperCase() }}
+              {{ product.nom.toUpperCase() }}
             </v-card-title>
           </router-link>
 
@@ -48,7 +48,7 @@
         <div class="my-4 text-subtitle-1">
           $ • Italian, Cafe
         </div>
-        <div>{{ product.price }}€</div>
+        <div>{{ product.prix }}€</div>
       </v-card-text>
 
       <v-divider class="mx-4 mb-1"></v-divider>

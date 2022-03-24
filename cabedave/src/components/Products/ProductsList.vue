@@ -33,17 +33,18 @@ export default {
       });
     },
   },
-  // async mounted() {
-  //   await this.$store.dispatch('getProducts');
-  //   this.data = this.$store.state.productsList;
-  // },
+  async mounted() {
+    await this.$store.dispatch('getProducts');
+    this.data = this.$store.state.productsList;
+  },
   data() {
     return {
       // data: [
       //   { id: 1, title: 'title', price: 24 },
       //   { id: 2, title: 'title2', price: 25 },
       // ],
-      data: this.$store.state.data,
+      // data: this.$store.state.data,
+      data: {},
       nameFilter: '',
     };
   },
