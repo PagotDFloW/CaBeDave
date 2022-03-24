@@ -46,6 +46,14 @@ app.put('/models/products/:ref', async (req, res) => {
     res.status(200).send('Product updated')
 });
 
+// -------- Marketplace - returns all products-----------
+app.get('/marketplace', function(req, res){
+    productModel.find().then(resultat => {
+        res.send(resultat)
+        console.log(resultat)
+    })
+})
+
 server.listen( 3000, function() {
     console.log('Server starting')
 })
