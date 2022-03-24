@@ -1,17 +1,21 @@
 <template>
   <div>
-    <main id="app">
-    <section ref="chatArea" class="chat-area">
+    <button class="open-button" @click="openForm()">Chat</button>
+    <main id="app popupMessage" class="chat-popup">
+      <section ref="chatArea" class="chat-area"  style="position: relative; display: none" >
       <p v-for="message in data" class="message"
          :class="{ 'message-out': message.role === 'user', 'message-in': message.role === 'admin' }"
-       v-bind:key="message">
+         v-bind:key="message">
         {{ message.message }}
       </p>
-    </section>
-    <label for="input">
-      <input id="input" type="text" class="form-control" placeholder="Name" v-model="message">
-    </label>
-    <button class="btn btn-success btn-block" @click="send()">Envoyer</button>
+        <form  v-on:submit.prevent="onSubmit" style="position: absolute; bottom: 0" y>
+          <label for="input">
+            <input id="input" type="text" class="form-control" placeholder="Name" v-model="message">
+          </label>
+          <button class="btn btn-success btn-block" @click="send()">Envoyer</button>
+          <button class="btn btn-success btn-block" @click="closeForm()">Fermer</button>
+        </form>
+      </section>
     </main>
   </div>
 </template>
@@ -29,7 +33,7 @@ export default {
   methods: {
     send() {
       const data = {
-        userName: 'FloW',
+        userName: this.name,
         message: this.message,
         socketId: this.$socketChatUser.id,
         role: 'user',
@@ -38,10 +42,15 @@ export default {
       this.data.push(data);
       this.message = '';
     },
+    openForm() {
+      this.$refs.chatArea.style.display = 'block';
+    },
+    closeForm() {
+      this.$refs.chatArea.style.display = 'none';
+    },
   },
   mounted() {
     this.$socketChatUser.on('message_sended', (data) => {
-      console.log(data);
       this.data.push(data);
     });
   },
@@ -49,6 +58,7 @@ export default {
     return {
       data: [],
       message: '',
+      name: 'Flow',
     };
   },
 };
@@ -64,20 +74,39 @@ body, html {
   background: linear-gradient(to right, #dc2430, #7b4397);
   /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
+.open-button {
+  background-color: #555;
+  color: white;
+  padding: 16px 20px;
+  border: none;
+  cursor: pointer;
+  opacity: 0.8;
+  position: fixed;
+  bottom: 23px;
+  right: 28px;
+  width: 280px;
+}
 
 .headline {
   text-align: center;
   font-weight: 100;
   color: white;
 }
+.chat-popup{
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  border: 3px solid #f1f1f1;
+  z-index: 9;
+}
+
 .chat-area {
   /*   border: 1px solid #ccc; */
   background: white;
   height: 50vh;
   padding: 1em;
   overflow: auto;
-  max-width: 350px;
-  margin: 0 auto 2em auto;
+  width: 350px;
   box-shadow: 2px 2px 5px 2px rgba(0, 0, 0, 0.3)
 }
 .message {
