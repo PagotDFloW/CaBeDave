@@ -1,17 +1,19 @@
 ﻿<template>
   <div>
     <main id="app">
-    <section ref="chatArea" class="chat-area">
+    <section ref="chatArea" class="chat-area" style="position: relative">
       <p v-for="message in data" class="message"
          :class="{ 'message-out': message.role === 'admin', 'message-in': message.role === 'user' }"
          v-bind:key="message">
         {{ message.message }}
       </p>
+      <form  v-on:submit.prevent="onSubmit" style="position: absolute; bottom: 0" y>
+        <label for="input">
+          <input id="input" type="text" class="form-control" placeholder="Name" v-model="message">
+        </label>
+        <button class="btn btn-success btn-block" @click="send()">Envoyer</button>
+      </form>
     </section>
-      <label for="input">
-        <input id="input" type="text" class="form-control" placeholder="Name" v-model="message">
-      </label>
-      <button class="btn btn-success btn-block" @click="send()">Envoyer</button>
     </main>
   </div>
 </template>
@@ -46,6 +48,7 @@ export default {
       this.data.push(data);
       console.log(data);
     });
+    console.log(this.$route);
   },
   data() {
     return {

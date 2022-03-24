@@ -18,6 +18,7 @@ const userNamespace = io.of("/users");
 const adminNamespace = io.of("/admin");
 
 
+
 userNamespace.on('connection', (socket ) => {
     console.log('user connected')
     socket.join('clientService1')
@@ -25,8 +26,6 @@ userNamespace.on('connection', (socket ) => {
         console.log('user disconnected');
     })
     socket.on('message_send', (data)=> {
-        console.log(`Message from ${data.userName} :  ${data.message}`)
-        
         adminNamespace.in('clientService1').emit('message_sended', data);
     })
 })
@@ -37,7 +36,7 @@ adminNamespace.on('connection', (socket ) => {
         console.log('admin disconnected');
     })
     socket.on('message_send', (data)=> {
-        console.log(`Message from ${data.userName}:  ${data.message}`)
+        console.log(data)
         userNamespace.in('clientService1').emit('message_sended', data);
     })
 })
