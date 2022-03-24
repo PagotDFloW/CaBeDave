@@ -1,5 +1,4 @@
 <template>
-
   <v-card>
       <v-img
         height="250"

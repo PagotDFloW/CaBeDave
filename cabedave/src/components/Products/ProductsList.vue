@@ -1,13 +1,12 @@
 <template>
     <div>
-      <p>List</p>
         <v-container>
         <v-row>
             <v-col sm="6" lg="4">
-            <!--<v-text-field label="Find"
+            <v-text-field label="Find"
                           prepend-icon="mdi-magnify"
                           v-model="nameFilter">
-            </v-text-field>-->
+            </v-text-field>
             </v-col>
         </v-row>
         <v-row>
