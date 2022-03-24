@@ -7,7 +7,8 @@ import vuetify from './plugins/vuetify';
 
 Vue.prototype.$socket = io('http://localhost:3000');
 
-Vue.prototype.$socketChat = io('http://localhost:4030/');
+Vue.prototype.$socketChatUser = io('http://localhost:4030/users');
+Vue.prototype.$socketChatAdmin = io('http://localhost:4030/admin');
 
 Vue.config.productionTip = false;
 

@@ -6,6 +6,7 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
+    isAdmin: false,
     productsList: [],
     product: [],
     data: [
@@ -29,6 +30,10 @@ export default new Vuex.Store({
       state.cartNbr += 1;
       console.log(state.cartNbr);
     },
+    settingAdmin(state, status) {
+      // eslint-disable-next-line no-return-assign
+      return state.isAdmin = status;
+    },
   },
   actions: {
     async getProducts(context) {
@@ -41,6 +46,10 @@ export default new Vuex.Store({
     },
     incrementCartNbr(context) {
       context.commit('incrementCartNbr', this.state.cartNbr);
+    },
+    settingAdmin(context) {
+      const status = true;
+      context.commit('settingAdmin', status);
     },
   },
   modules: {
