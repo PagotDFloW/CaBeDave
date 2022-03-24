@@ -2,12 +2,12 @@
   <div>
     <main id="app">
     <section ref="chatArea" class="chat-area" style="position: relative">
-      <p v-for="message in data" class="message"
+      <p v-for="(message,index) in data" class="message"
          :class="{ 'message-out': message.role === 'admin', 'message-in': message.role === 'user' }"
-         v-bind:key="message">
+         :key="index">
         {{ message.message }}
       </p>
-      <form  v-on:submit.prevent="onSubmit" style="position: absolute; bottom: 0" y>
+      <form  v-on:submit.prevent style="position: absolute; bottom: 0" y>
         <label for="input">
           <input id="input" type="text" class="form-control" placeholder="Name" v-model="message">
         </label>
@@ -46,9 +46,7 @@ export default {
   mounted() {
     this.$socketChatAdmin.on('message_sended', (data) => {
       this.data.push(data);
-      console.log(data);
     });
-    console.log(this.$route);
   },
   data() {
     return {
