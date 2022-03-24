@@ -51,7 +51,16 @@ app.get('/marketplace', function(req, res){
         res.send(resultat)
         console.log(resultat)
     })
-})
+}); 
+
+// -------- Get single product by id-----------
+app.get('/products/:id', function(req, res){
+    const id = req.params.id;
+    productModel.findOne({_id: id}).then(unSeulProduit =>{
+        res.json(unSeulProduit)
+        console.log(unSeulProduit)
+    })
+}); 
 
 server.listen( 3000, function() {
     console.log('Server starting')
