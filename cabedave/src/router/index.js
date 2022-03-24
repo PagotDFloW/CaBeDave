@@ -2,6 +2,7 @@ import Vue from 'vue';
 import VueRouter from 'vue-router';
 // eslint-disable-next-line import/extensions
 import ChatView from '@/views/ChatView';
+import ChatAdminView from '@/views/ChatAdminView.vue';
 import HomeView from '../views/HomeView.vue';
 import Products from '../views/Products/ProductsView.vue';
 import SingleProduct from '../views/Products/SingleProductView.vue';
@@ -42,6 +43,11 @@ const routes = [
     path: '/cart/user',
     name: 'user_cart',
     component: Cart,
+  },
+  {
+    path: '/adminChat',
+    name: 'ChatAdmin',
+    component: ChatAdminView,
   },
 ];
 

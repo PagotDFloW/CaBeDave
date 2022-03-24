@@ -15,13 +15,16 @@ app.use(bodyParser.urlencoded({extended : true}))
 app.use(cors())
 
 io.on('connection', (socket ) => {
+    let token = socket.handshake.query.isAdmin;
+    console.log(token)
     console.log('a user connected');
     socket.on('disconnect', () =>{
         console.log('user disconnected');
     })
     socket.on('message_send', (data)=> {
         console.log(data)
-        console.log(`Message from ${data.userName} :  ${data.message}`)
+        console.log(`Message fraom ${data.userName} :  ${data.message}`)
+        io.emit('message_send', `Message from ${data.userName} :  ${data.message}`);
     })
 })
 
