@@ -8,6 +8,8 @@ const  io = new Server( server, {
         origin: '*',
     }
 } )
+
+let productsList; 
 const bodyParser =  require('body-parser')
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended : true}))
@@ -50,6 +52,7 @@ app.get('/marketplace', function(req, res){
     productModel.find().then(resultat => {
         res.send(resultat)
         console.log(resultat)
+        productsList = resultat; 
     })
 }); 
 
@@ -61,6 +64,23 @@ app.get('/products/:id', function(req, res){
         console.log(unSeulProduit)
     })
 }); 
+
+// -------- Filtrer la liste des produits récupérée dans le get -----------
+io.on('connection', (socket ) => {
+    console.log('a user connected');
+    socket.on('disconnect', () =>{
+        console.log('user disconnected');
+    })
+    socket.on('filtername_change', (data)=> {
+        const filtredProducts = productsList.filter(el => 
+            el.nom.includes(data)
+        )
+        console.log(filtredProducts)
+        socket.emit('filtered_name', filtredProducts)
+
+    })
+}); 
+
 
 server.listen( 3000, function() {
     console.log('Server starting')
