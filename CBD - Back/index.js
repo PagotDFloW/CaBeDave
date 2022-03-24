@@ -20,8 +20,7 @@ app.use(cors())
 app.use(express.json());
 
 // -------- addProduct-----------
-app.post('/models/products', (req, res, next) => {
-    console.log(req.body);
+app.post('/models/products', (req, res) => {
     const product = new productModel(req.body);
     product.save().then( () => { res.send("new object added")});
 });
