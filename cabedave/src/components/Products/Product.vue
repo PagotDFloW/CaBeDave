@@ -66,7 +66,7 @@
         <v-btn
           color="deep-purple-lighten-2"
           text
-          @click="reserve"
+          @click="buy()"
         >
           <v-icon large color="teal lighten-2" >mdi-cart</v-icon>
         </v-btn>
@@ -88,11 +88,15 @@ export default {
     // eslint-disable-next-line no-return-assign
     setTimeout(() => this.loading = false, 2000);
   },
-
   data() {
     return {
       loading: true,
     };
+  },
+  methods: {
+    buy() {
+      this.$store.dispatch('incrementCartNbr');
+    },
   },
 };
 </script>

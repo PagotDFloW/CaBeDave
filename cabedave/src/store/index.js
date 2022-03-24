@@ -16,6 +16,7 @@ export default new Vuex.Store({
       { id: 5, title: 'title5', price: 55 },
       { id: 6, title: 'title6', price: 65 },
     ],
+    cartNbr: 0,
   },
   mutations: {
     getProducts(state, data) {
@@ -24,16 +25,22 @@ export default new Vuex.Store({
     getSingleProduct(state, data) {
       state.product = data;
     },
+    incrementCartNbr(state) {
+      state.cartNbr += 1;
+      console.log(state.cartNbr);
+    },
   },
   actions: {
     async getProducts(context) {
       const { data } = (await axios.get('http://localhost:3000/marketplace'));
       context.commit('getProducts', data);
-      console.log(data);
     },
     async getSingleProduct(context) {
       const { data } = (await axios.get('loaclhost:3000/product/:id'));
       context.commit('getSingleProduct', data);
+    },
+    incrementCartNbr(context) {
+      context.commit('incrementCartNbr', this.state.cartNbr);
     },
   },
   modules: {
