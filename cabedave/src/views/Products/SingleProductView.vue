@@ -88,17 +88,9 @@ export default {
       product: {},
     };
   },
-  // mounted() {
-  //   this.products = this.$store.state.data;
-  // },
   async mounted() {
     await this.$store.dispatch('getSingleProduct');
     this.data = this.$store.state.product;
   },
-  // computed: {
-  //   product() {
-  //     return this.products.find((el) => el.id === +this.$route.params.id) || {};
-  //   },
-  // },
 };
 </script>
