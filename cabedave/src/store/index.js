@@ -27,8 +27,9 @@ export default new Vuex.Store({
   },
   actions: {
     async getProducts(context) {
-      const { data } = (await axios.get('localhost:3000/products'));
+      const { data } = (await axios.get('http://localhost:3000/marketplace'));
       context.commit('getProducts', data);
+      console.log(data);
     },
     async getSingleProduct(context) {
       const { data } = (await axios.get('loaclhost:3000/product/:id'));
