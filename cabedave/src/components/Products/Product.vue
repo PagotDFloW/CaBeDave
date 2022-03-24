@@ -91,7 +91,6 @@ export default {
   },
 
   data() {
-    console.log(this.product);
     return {
       loading: true,
     };
