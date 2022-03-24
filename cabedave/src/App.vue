@@ -52,14 +52,19 @@
     <v-main>
       <router-view/>
     </v-main>
+
+    <footer-view/>
   </v-app>
 </template>
 
 <script>
+import FooterView from './components/Footer.vue';
 
 export default {
   name: 'App',
-
+  components: {
+    FooterView,
+  },
   data: () => ({
     //
   }),
