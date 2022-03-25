@@ -18,13 +18,24 @@ const { userModel } = require("./Models/userModel.js")
 const cors = require('cors')
 const mongoose = require("mongoose");
 const passwordHash = require('password-hash');
-const store = require("store2");
 
 app.use(cors())
 
 app.use(express.json());
 
 
+// -------- Get single user by E-mail-----------
+app.post('/connexion', function(req, res){
+    const email = req.body.email;
+    userModel.findOne({email: email}).then(unSeulUser =>{
+        if (unSeulUser === null || unSeulUser == undefined ){
+            res.send("Email incorrect ou inexistant.");
+        }
+        else if (passwordHash.verify(req.body.password, unSeulUser.password)) {
+            res.json(unSeulUser)
+        } else { res.send("Password incorrect ou inexistant.")}
+    })
+});
 
 // --------------- adduser ----------
 app.post('/models/users/addusers', (req, res) => {
@@ -100,6 +111,8 @@ app.get('/products/:id', function(req, res){
         res.json(unSeulProduit)
     })
 }); 
+
+
 
 // -------- Filtrer la liste des produits récupérée dans le get -----------
 io.on('connection', (socket ) => {
