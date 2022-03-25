@@ -41,7 +41,17 @@
 
         <v-list-item>
           <v-list-item-content>
-            <v-list-item-title>Three-line item</v-list-item-title>
+            <v-list-item-title>
+              <a href="/inscription" class="white--text text-decoration-none">Inscription</a>
+            </v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+
+        <v-list-item>
+          <v-list-item-content>
+            <v-list-item-title>
+              <a href="/connexion" class="white--text text-decoration-none">Connexion</a>
+            </v-list-item-title>
           </v-list-item-content>
         </v-list-item>
       </div>
