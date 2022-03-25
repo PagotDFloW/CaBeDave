@@ -1,7 +1,5 @@
 <template>
     <v-bottom-navigation
-    v-model="value"
-    :background-color="color"
     dark
     shift
   >
