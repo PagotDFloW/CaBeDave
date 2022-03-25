@@ -9,7 +9,7 @@ const  io = new Server( server, {
     }
 } )
 
-let productsList; 
+let productsList = []; 
 const bodyParser =  require('body-parser')
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended : true}))
@@ -39,7 +39,6 @@ app.post('/connexion', function(req, res){
 
 // --------------- adduser ----------
 app.post('/models/users/addusers', (req, res) => {
-    console.log(req.body);
     req.body.password = passwordHash.generate(req.body.password);
     var user = new userModel(req.body);
     user.save().then( () => { res.send("new user added")});
@@ -106,8 +105,7 @@ app.get('/marketplace', function(req, res){
 // -------- Get single product by id-----------
 app.get('/products/:id', function(req, res){
     const id = req.params._id;
-    console.log(req.params)
-    productModel.findOne({_id: id}).then(unSeulProduit =>{
+    productModel.findOne({id: id}).then(unSeulProduit =>{
         res.json(unSeulProduit)
     })
 }); 
@@ -116,19 +114,28 @@ app.get('/products/:id', function(req, res){
 
 // -------- Filtrer la liste des produits récupérée dans le get -----------
 io.on('connection', (socket ) => {
-    console.log('a user connected');
     socket.on('disconnect', () =>{
         console.log('user disconnected');
     })
     socket.on('filtername_change', (data)=> {
-        const filtredProducts = productsList.filter(el => 
-            el.nom.includes(data)
-        )
-        console.log(filtredProducts)
-        socket.emit('filtered_name', filtredProducts)
+        let filtredProducts = [];
+        if(productsList != undefined && productsList != []){
+            if(data != ''){
+                filtredProducts = productsList.filter(function (el) {
+                        return el.nom?.includes(data)
 
+                    }
+                )
+            }
+            else{
+                filtredProducts = productsList;
+            }
+            
+            console.log(filtredProducts)
+            socket.emit('filtered_name', filtredProducts)
+        }
     })
-}); 
+});
 
 
 server.listen( 3000, function() {

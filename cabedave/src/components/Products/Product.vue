@@ -15,7 +15,7 @@
           </router-link>
 
           <v-card-subtitle>
-            <span class="mr-1">Local Favorite</span>
+            <span class="mr-1">{{ product.categorie}}</span>
 
             <v-icon
               color="error"
@@ -46,15 +46,12 @@
         </v-row>
 
         <div class="my-4 text-subtitle-1">
-          $ • Italian, Cafe
+          {{ product.prix }}€ • Italian, Cafe
         </div>
-        <div>{{ product.prix }}€</div>
+        <div>{{ product.description }}</div>
       </v-card-text>
 
       <v-divider class="mx-4 mb-1"></v-divider>
-
-      <v-card-title>Tonight's availability</v-card-title>
-
       <div class="px-4">
         <!-- <v-chip-group v-model="selection">
           <v-chip v-for="(attribute, index) in item.attributes"

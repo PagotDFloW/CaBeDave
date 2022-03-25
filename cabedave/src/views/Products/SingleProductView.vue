@@ -15,11 +15,11 @@
         <v-card-header>
           <v-card-header-text>
               <v-card-title class="black--text text-decoration-none">
-                {{ product.title }}
+                {{ product.nom }}
               </v-card-title>
 
             <v-card-subtitle>
-              <span class="mr-1">Local Favorite</span>
+              <span class="mr-1">{{ product.categorie}}</span>
 
               <v-icon
                 color="error"
@@ -50,14 +50,12 @@
           </v-row>
 
           <div class="my-4 text-subtitle-1">
-            $ • Italian, Cafe
+            {{ product.prix }}€ • Italian, Cafe
           </div>
-          <div>{{ product.price }}€</div>
+          <div>{{ product.description }}</div>
         </v-card-text>
 
         <v-divider class="mx-4 mb-1"></v-divider>
-
-        <v-card-title>Tonight's availability</v-card-title>
 
         <div class="px-4">
           <!-- <v-chip-group v-model="selection">
@@ -70,6 +68,7 @@
           <v-btn
             color="deep-purple-lighten-2"
             text
+            @click="buy()"
           >
             <v-icon large color="teal lighten-2" >mdi-cart</v-icon>
           </v-btn>
@@ -80,6 +79,7 @@
 </template>
 
 <script>
+
 export default {
   name: 'SingleProductView',
   data() {
@@ -89,7 +89,13 @@ export default {
   },
   async mounted() {
     await this.$store.dispatch('getSingleProduct', this.$route.params.id);
-    this.data = this.$store.state.product;
+    this.product = this.$store.state.product;
+  },
+  methods: {
+    buy() {
+      this.$store.state.product = this.product;
+      this.$store.dispatch('incrementCartNbr');
+    },
   },
 };
 </script>

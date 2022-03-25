@@ -18,7 +18,7 @@
         <v-list-item>
           <v-list-item-content>
             <v-list-item-title>
-              <a href="/" class="white--text text-decoration-none">CODEBO</a>
+              <a href="/" class="white--text text-decoration-none">CABEDAVE</a>
             </v-list-item-title>
           </v-list-item-content>
         </v-list-item>
