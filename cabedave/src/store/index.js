@@ -29,7 +29,6 @@ export default new Vuex.Store({
     },
     incrementCartNbr(state) {
       state.cartNbr += 1;
-      console.log(state.cartNbr);
     },
     settingAdmin(state, status) {
       // eslint-disable-next-line no-return-assign
