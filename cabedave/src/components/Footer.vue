@@ -25,7 +25,7 @@
     </v-btn>
 
     <v-btn
-      href="/cart/user"
+      href="/cart"
       class="d-flex"
     >
       <span>Cart</span>

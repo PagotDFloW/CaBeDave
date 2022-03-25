@@ -42,6 +42,9 @@ export default new Vuex.Store({
         state.cart = arrayCart;
       }
     },
+    removeCart(state, product) {
+      state.cart = state.cart.filter((item) => item !== product);
+    },
   },
   actions: {
     async getProducts(context) {
@@ -60,6 +63,10 @@ export default new Vuex.Store({
     settingAdmin(context) {
       const status = true;
       context.commit('settingAdmin', status);
+    },
+    removeCart(context, product) {
+      context.commit('removeCart', product);
+      localStorage.setItem('panier', JSON.stringify(this.state.cart));
     },
   },
   modules: {
