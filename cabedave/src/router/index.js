@@ -9,7 +9,6 @@ import HomeView from '../views/HomeView.vue';
 import Products from '../views/Products/ProductsView.vue';
 import SingleProduct from '../views/Products/SingleProductView.vue';
 // eslint-disable-next-line import/extensions
-import Cart from '../views/Cart/CartView.vue';
 import Inscription from '../views/ConnexionInscription/Inscription.vue';
 import Connexion from '../views/ConnexionInscription/Connexion.vue';
 
