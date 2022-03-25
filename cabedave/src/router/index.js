@@ -3,10 +3,12 @@ import VueRouter from 'vue-router';
 // eslint-disable-next-line import/extensions
 import ChatView from '@/views/ChatView';
 import ChatAdminView from '@/views/ChatAdminView.vue';
+// eslint-disable-next-line import/extensions
+import CartVue from '@/components/CartVue';
 import HomeView from '../views/HomeView.vue';
 import Products from '../views/Products/ProductsView.vue';
 import SingleProduct from '../views/Products/SingleProductView.vue';
-import Cart from '../views/Cart/CartView.vue';
+// eslint-disable-next-line import/extensions
 
 Vue.use(VueRouter);
 
@@ -40,9 +42,9 @@ const routes = [
     component: SingleProduct,
   },
   {
-    path: '/cart/user',
-    name: 'user_cart',
-    component: Cart,
+    path: '/cart',
+    name: 'Cart',
+    component: CartVue,
   },
   {
     path: '/adminChat',
