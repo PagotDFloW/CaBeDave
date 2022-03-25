@@ -36,7 +36,6 @@ export default new Vuex.Store({
       return state.isAdmin = status;
     },
     setCart(state, product) {
-      console.log(state.cart);
       if (Array.isArray(state.cart)) {
         state.cart.push(product);
       } else {
