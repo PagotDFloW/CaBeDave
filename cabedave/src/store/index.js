@@ -6,6 +6,7 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
+    isAdmin: false,
     productsList: [],
     product: [],
     data: [
@@ -17,6 +18,7 @@ export default new Vuex.Store({
       { id: 6, title: 'title6', price: 65 },
     ],
     cartNbr: 0,
+    cart: JSON.parse(localStorage.getItem('panier')),
   },
   mutations: {
     getProducts(state, data) {
@@ -28,6 +30,19 @@ export default new Vuex.Store({
     incrementCartNbr(state) {
       state.cartNbr += 1;
       console.log(state.cartNbr);
+    },
+    settingAdmin(state, status) {
+      // eslint-disable-next-line no-return-assign
+      return state.isAdmin = status;
+    },
+    setCart(state, product) {
+      console.log(state.cart);
+      if (Array.isArray(state.cart)) {
+        state.cart.push(product);
+      } else {
+        const arrayCart = [product];
+        state.cart = arrayCart;
+      }
     },
   },
   actions: {
@@ -41,6 +56,12 @@ export default new Vuex.Store({
     },
     incrementCartNbr(context) {
       context.commit('incrementCartNbr', this.state.cartNbr);
+      context.commit('setCart', this.state.product);
+      localStorage.setItem('panier', JSON.stringify(this.state.cart));
+    },
+    settingAdmin(context) {
+      const status = true;
+      context.commit('settingAdmin', status);
     },
   },
   modules: {
