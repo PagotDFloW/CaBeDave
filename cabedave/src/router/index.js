@@ -9,6 +9,9 @@ import HomeView from '../views/HomeView.vue';
 import Products from '../views/Products/ProductsView.vue';
 import SingleProduct from '../views/Products/SingleProductView.vue';
 // eslint-disable-next-line import/extensions
+import Cart from '../views/Cart/CartView.vue';
+import Inscription from '../views/ConnexionInscription/Inscription.vue';
+import Connexion from '../views/ConnexionInscription/Connexion.vue';
 
 Vue.use(VueRouter);
 
@@ -50,6 +53,16 @@ const routes = [
     path: '/adminChat',
     name: 'ChatAdmin',
     component: ChatAdminView,
+  },
+  {
+    path: '/inscription',
+    name: 'inscription',
+    component: Inscription,
+  },
+  {
+    path: '/connexion',
+    name: 'connexion',
+    component: Connexion,
   },
 ];
 
