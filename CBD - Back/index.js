@@ -14,12 +14,47 @@ const bodyParser =  require('body-parser')
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended : true}))
 const { productModel } = require("./Models/productModel.js")
+const { userModel } = require("./Models/userModel.js")
+const { panierModel } = require("./Models/panierModel.js")
 const cors = require('cors')
 const mongoose = require("mongoose");
+const passwordHash = require('password-hash');
 
 app.use(cors())
 
 app.use(express.json());
+
+
+
+// --------------- adduser ----------
+app.post('/models/users/addusers', (req, res) => {
+    console.log(req.body);
+    req.body.password = passwordHash.generate(req.body.password);
+    var user = new userModel(req.body);
+    user.save().then( () => { res.send("new user added")});
+});
+
+// --------------- DeleteUser
+app.delete('/models/users/:_id', async (req, res) => {
+    const id = req.params._id
+    const user = await userModel.find({_id:id});
+    await userModel.deleteOne({_id:id});
+    res.status(200).json('User deleted:' + user)
+});
+
+//-------- updateUser-----------
+app.put('/models/users/:_id', async (req, res) => {
+    if (req.body._id) {
+        res.status(405).send('Couldn\`t modify user id ')
+    }
+    const id = req.params._id
+    req.body.password = passwordHash.generate(req.body.password);
+    const user = await userModel.updateOne({_id:id}, {
+        $set: req.body
+    });
+    res.status(200).send('user updated')
+});
+
 
 // -------- addProduct-----------
 app.post('/models/products', (req, res) => {
