@@ -15,10 +15,10 @@ app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended : true}))
 const { productModel } = require("./Models/productModel.js")
 const { userModel } = require("./Models/userModel.js")
-const { panierModel } = require("./Models/panierModel.js")
 const cors = require('cors')
 const mongoose = require("mongoose");
 const passwordHash = require('password-hash');
+const store = require("store2");
 
 app.use(cors())
 
@@ -54,6 +54,8 @@ app.put('/models/users/:_id', async (req, res) => {
     });
     res.status(200).send('user updated')
 });
+
+
 
 
 // -------- addProduct-----------
