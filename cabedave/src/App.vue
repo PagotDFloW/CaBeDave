@@ -54,16 +54,21 @@
     </v-main>
 
     <footer-view/>
+    <div v-if="this.$store.state.isAdmin !== true">
+      <Chat/>
+    </div>
   </v-app>
 </template>
 
 <script>
+// eslint-disable-next-line import/extensions
+import Chat from '@/components/Chat';
 import FooterView from './components/Footer.vue';
 
 export default {
   name: 'App',
   components: {
-    FooterView,
+    FooterView, Chat,
   },
   data: () => ({
     //

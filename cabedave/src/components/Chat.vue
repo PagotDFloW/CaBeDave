@@ -1,20 +1,62 @@
 <template>
   <div>
-    <button class="open-button" @click="openForm()">Chat</button>
+    <v-btn
+      class="mx-2 open-button"
+      fab
+      dark
+      large
+      color="cyan"
+      @click="openForm()"
+    >
+      <v-icon dark>
+        mdi-chat
+      </v-icon>
+    </v-btn>
     <main id="app popupMessage" class="chat-popup">
       <section ref="chatArea" class="chat-area"  style="position: relative; display: none" >
-      <p v-for="(message, index) in data" class="message"
+        <div class="text-sm-body-2 blue white--text" style="padding: 1em">
+          <h2>Discussion avec le Service client</h2>
+        </div>
+      <p v-for="(message, index) in data" class="message mt-2"
          :class="{ 'message-out': message.role === 'user', 'message-in': message.role === 'admin' }"
          :key="index">
         {{ message.message }}
       </p>
-        <form  v-on:submit.prevent style="position: absolute; bottom: 0" y>
-          <label for="input">
-            <input id="input" type="text" class="form-control" placeholder="Name" v-model="message">
-          </label>
-          <button class="btn btn-success btn-block" @click="send()">Envoyer</button>
-          <button class="btn btn-success btn-block" @click="closeForm()">Fermer</button>
-        </form>
+        <v-form class="d-flex"  v-on:submit.prevent style="position: absolute; bottom: 0;">
+          <v-container>
+            <v-row>
+              <v-col cols="8">
+                <v-text-field label="Entrer votre message" v-model="message"></v-text-field>
+              </v-col>
+              <v-col cols="2">
+                <v-btn
+                  class="mt-4"
+                  fab
+                  x-small
+                  dark
+                  color="green" @click="send()"
+                >
+                  <v-icon dark>
+                    mdi-send
+                  </v-icon>
+                </v-btn>
+              </v-col>
+              <v-col cols="2">
+                <v-btn
+                  class="mt-4"
+                  fab
+                  x-small
+                  dark
+                  color="red" @click="closeForm()"
+                >
+                  <v-icon dark>
+                    mdi-close
+                  </v-icon>
+                </v-btn>
+              </v-col>
+            </v-row>
+          </v-container>
+        </v-form>
       </section>
     </main>
   </div>
@@ -104,7 +146,6 @@ body, html {
   /*   border: 1px solid #ccc; */
   background: white;
   height: 50vh;
-  padding: 1em;
   overflow: auto;
   width: 350px;
   box-shadow: 2px 2px 5px 2px rgba(0, 0, 0, 0.3)

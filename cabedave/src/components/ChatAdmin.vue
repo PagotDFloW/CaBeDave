@@ -1,19 +1,39 @@
 ﻿<template>
   <div>
-    <main id="app">
-    <section ref="chatArea" class="chat-area" style="position: relative">
-      <p v-for="(message,index) in data" class="message"
-         :class="{ 'message-out': message.role === 'admin', 'message-in': message.role === 'user' }"
-         :key="index">
-        {{ message.message }}
-      </p>
-      <form  v-on:submit.prevent style="position: absolute; bottom: 0" y>
-        <label for="input">
-          <input id="input" type="text" class="form-control" placeholder="Name" v-model="message">
-        </label>
-        <button class="btn btn-success btn-block" @click="send()">Envoyer</button>
-      </form>
-    </section>
+    <h2 class="text-center">Messagerie</h2>
+    <main id="app" class="mt-lg-10">
+      <section ref="chatArea" class="chat-area"  style="position: relative;" >
+        <p v-for="(message,index) in data" class="message mt-2"
+           :class="{ 'message-out': message.role === 'admin',
+           'message-in': message.role === 'user' }"
+           :key="index" style="font-size: 20px">
+          {{ message.message }}
+        </p>
+        <v-form class=""
+                v-on:submit.prevent style="position: absolute; bottom: 0; width: 100%;
+                text-align: center">
+          <v-container>
+            <v-row>
+              <v-col cols="10">
+                <v-text-field label="Entrer votre message" v-model="message"></v-text-field>
+              </v-col>
+              <v-col cols="2">
+                <v-btn
+                  class="mt-4"
+                  fab
+                  small
+                  dark
+                  color="green" @click="send()"
+                >
+                  <v-icon dark>
+                    mdi-send
+                  </v-icon>
+                </v-btn>
+              </v-col>
+            </v-row>
+          </v-container>
+        </v-form>
+      </section>
     </main>
   </div>
 </template>
@@ -47,6 +67,7 @@ export default {
     this.$socketChatAdmin.on('message_sended', (data) => {
       this.data.push(data);
     });
+    this.$store.dispatch('settingAdmin', true);
   },
   data() {
     return {
@@ -77,10 +98,8 @@ body, html {
 .chat-area {
   /*   border: 1px solid #ccc; */
   background: white;
-  height: 50vh;
-  padding: 1em;
+  height: 70vh;
   overflow: auto;
-  max-width: 350px;
   margin: 0 auto 2em auto;
   box-shadow: 2px 2px 5px 2px rgba(0, 0, 0, 0.3)
 }
