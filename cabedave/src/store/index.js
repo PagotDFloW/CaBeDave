@@ -35,8 +35,8 @@ export default new Vuex.Store({
       const { data } = (await axios.get('http://localhost:3000/marketplace'));
       context.commit('getProducts', data);
     },
-    async getSingleProduct(context) {
-      const { data } = (await axios.get('loaclhost:3000/product/:id'));
+    async getSingleProduct(context, id) {
+      const { data } = (await axios.get(`http://localhost:3000/products/${id}`));
       context.commit('getSingleProduct', data);
     },
     incrementCartNbr(context) {

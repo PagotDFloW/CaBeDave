@@ -51,17 +51,16 @@ app.put('/models/products/:ref', async (req, res) => {
 app.get('/marketplace', function(req, res){
     productModel.find().then(resultat => {
         res.send(resultat)
-        console.log(resultat)
         productsList = resultat; 
     })
 }); 
 
 // -------- Get single product by id-----------
 app.get('/products/:id', function(req, res){
-    const id = req.params.id;
+    const id = req.params._id;
+    console.log(req.params)
     productModel.findOne({_id: id}).then(unSeulProduit =>{
         res.json(unSeulProduit)
-        console.log(unSeulProduit)
     })
 }); 
 

@@ -15,7 +15,7 @@
         <v-card-header>
           <v-card-header-text>
               <v-card-title class="black--text text-decoration-none">
-                {{ product.title.toUpperCase() }}
+                {{ product.title }}
               </v-card-title>
 
             <v-card-subtitle>
@@ -70,7 +70,6 @@
           <v-btn
             color="deep-purple-lighten-2"
             text
-            @click="reserve"
           >
             <v-icon large color="teal lighten-2" >mdi-cart</v-icon>
           </v-btn>
@@ -89,7 +88,7 @@ export default {
     };
   },
   async mounted() {
-    await this.$store.dispatch('getSingleProduct');
+    await this.$store.dispatch('getSingleProduct', this.$route.params.id);
     this.data = this.$store.state.product;
   },
 };

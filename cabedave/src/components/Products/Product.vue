@@ -8,7 +8,7 @@
 
       <v-card-header>
         <v-card-header-text>
-          <router-link :to="{ name: 'product', params: { id: product.id }}">
+          <router-link :to="{ name: 'products_id', params: { 'id': product._id }}">
             <v-card-title class="black--text text-decoration-none">
               {{ product.nom.toUpperCase() }}
             </v-card-title>

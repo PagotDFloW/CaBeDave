@@ -3,7 +3,7 @@
   <hello-world />
   <v-container>
     <v-row>
-      <v-col v-for="(product, index) in data.slice(0, 5)" :key="index" lg="4" sm="6">
+      <v-col v-for="(product, index) in data" :key="index" lg="4" sm="6">
         <product :product="product"/>
       </v-col>
     </v-row>
