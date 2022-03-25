@@ -95,6 +95,7 @@ export default {
   },
   methods: {
     buy() {
+      this.$store.state.product = this.product;
       this.$store.dispatch('incrementCartNbr');
     },
   },
